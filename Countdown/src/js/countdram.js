@@ -7,7 +7,7 @@ var WINDOW_WIDTH = 1024,
 	CANVAS_y = 50,
 	CANVAS_Y = 200;
 
-const endTime = new Date(2019, 0, 0, 0, 5, 0);
+const endTime = new Date(2019, 0, 0, 0, 0, 0);
 var curShow = 0;
 var balls = [];
 
