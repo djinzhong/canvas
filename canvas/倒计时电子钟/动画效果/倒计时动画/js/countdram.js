@@ -2,7 +2,7 @@ var WINDOW_WIDTH = 1024,
 	WINDOW_HEIGHT = 600,
 	CANVAS_COLOR = "rgb(0, 102, 153)",
 	CANVAS_RADIUS = 5,
-	CANVAS_x = 350,
+	CANVAS_x = 320,
 	CANVAS_X = 150,
 	CANVAS_y = 50,
 	CANVAS_Y = 200;
@@ -19,23 +19,23 @@ window.onload = function() {
 	var canvas = document.getElementById('canvas'),
 		context = canvas.getContext("2d");
 	
-	var h1EleHeight = document.getElementById('title').offsetHeight;
-		
-	WINDOW_WIDTH = document.body.clientWidth;
-	
-	if(WINDOW_WIDTH > 1000) {
-		WINDOW_HEIGHT = document.body.clientHeight - h1EleHeight
-	}else {
-		WINDOW_HEIGHT = (document.body.clientHeight - h1EleHeight) / 2;
-	}
-	
-    CANVAS_RADIUS = Math.round(WINDOW_WIDTH * 4 / 5 / 108)-1
-	
-	CANVAS_x = Math.round(WINDOW_WIDTH * 5 / 16)
-	CANVAS_y = CANVAS_RADIUS * 2
-	
-	CANVAS_X = Math.round(WINDOW_WIDTH /10);
-	CANVAS_Y = 13 * (CANVAS_RADIUS + 1) * 2;
+// 	var h1EleHeight = document.getElementById('title').offsetHeight;
+// 		
+// 	WINDOW_WIDTH = document.body.clientWidth;
+// 	
+// 	if(WINDOW_WIDTH > 1000) {
+// 		WINDOW_HEIGHT = document.body.clientHeight - h1EleHeight
+// 	}else {
+// 		WINDOW_HEIGHT = (document.body.clientHeight - h1EleHeight) / 2;
+// 	}
+// 	
+//     CANVAS_RADIUS = Math.round(WINDOW_WIDTH * 4 / 5 / 108)-1
+// 	
+// 	CANVAS_x = Math.round(WINDOW_WIDTH * 5 / 16)
+// 	CANVAS_y = CANVAS_RADIUS * 2
+// 	
+// 	CANVAS_X = Math.round(WINDOW_WIDTH /10);
+// 	CANVAS_Y = 13 * (CANVAS_RADIUS + 1) * 2;
 
     
 
@@ -107,15 +107,18 @@ function addBalls(x, y, num) {
 			if (digit[num][i] instanceof Array) {
 				for (var j = 0; j < digit[num][i].length; j++) {
 					if (digit[num][i][j]) {
-						var aBall = {
-							x: x + j * 2 * (r + 1) + (r + 1),
-							y: y + i * 2 * (r + 1) + (r + 1),
-							g: 1.5 + Math.random(),
-							vx: Math.pow(-1, Math.ceil(Math.random() * 1000)) * 4,
-							vy: -5,
-							color: colors[Math.floor(Math.random() * colors.length)]
+						for(var k = 0; k < 10; k ++) {
+							var aBall = {
+								x: x + j * 2 * (r + 1) + (r + 1),
+								y: y + i * 2 * (r + 1) + (r + 1),
+								g: 1.5 + Math.random(),
+								vx: Math.pow(-1, Math.ceil(Math.random() * 1000)) * Math.random() * 10,
+								vy: -Math.random() * 20,
+								color: colors[Math.floor(Math.random() * colors.length)]
+							}
+							balls.push(aBall);
 						}
-						balls.push(aBall);
+ 			
 					}
 				}
 			}
@@ -132,7 +135,12 @@ function updateBallls() {
 		if (balls[i].y >= WINDOW_HEIGHT - CANVAS_RADIUS) {
 			balls[i].y = WINDOW_HEIGHT - CANVAS_RADIUS;
 			balls[i].vy = -balls[i].vy * 0.75;
+			balls[i].x * 10
 		}
+// 		if(balls[i].y < CANVAS_RADIUS) {
+// 			balls[i].y = CANVAS_RADIUS;
+// 			balls[i].vy = -balls[i].vy * 0.75;	
+// 		}
 	}
 
 	var cnt = 0;
@@ -142,7 +150,7 @@ function updateBallls() {
 		}
 	}
 
-	while (balls.length > Math.min(300, cnt)) {
+	while (balls.length > Math.min(500, cnt)) {
 		balls.pop();
 	}
 
